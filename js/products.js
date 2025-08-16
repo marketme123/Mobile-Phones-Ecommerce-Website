@@ -60,6 +60,23 @@ function addBasket(id, index, color) {
         return alert("Product is already in cart!");
     }
 
+    const product = products.find(p => p.id === id);
+
+    dataLayer.push({
+        event: "add_to_cart",
+        ecommerce: {
+            items: [
+                {
+                    item_id: id,
+                    item_name: product.name,
+                    price: product.price,
+                    item_variant: color,
+                    quantity: 1
+                }
+            ]
+        }
+    })
+
     basket.push({
         id: id,
         color: {index: index, name: color},
